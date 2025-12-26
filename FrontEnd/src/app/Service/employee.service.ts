@@ -13,4 +13,8 @@ export class EmployeeService {
   getEmployeeList():Observable<any[]>{
     return this.httpClient.get<any[]>(`${this.baseURL}/list`);
   }
+
+  getSearchResult(value:any):Observable<any[]>{
+    return this.httpClient.get<any[]>(`${this.baseURL}/search?employeeName=${value}`);
+  }
 }
