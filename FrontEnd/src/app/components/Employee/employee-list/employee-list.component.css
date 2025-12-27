@@ -5,3 +5,33 @@
     font-weight: 500;
   }
   
+  .action-cell {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+  }
+  
+  .action-btn {
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 6px;
+    width: 36px;
+    height: 36px;
+  }
+  
+  .action-btn mat-icon {
+    font-size: 20px;
+  }
+  
+  .action-btn:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+  
+  .action-btn.delete {
+    border-color: rgba(244, 67, 54, 0.6);
+  }
+  
+  .action-btn.delete mat-icon {
+    color: #d32f2f;
+  }
+  
+  

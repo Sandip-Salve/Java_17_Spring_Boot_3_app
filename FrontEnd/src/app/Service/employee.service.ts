@@ -17,4 +17,8 @@ export class EmployeeService {
   getSearchResult(value:any):Observable<any[]>{
     return this.httpClient.get<any[]>(`${this.baseURL}/search?employeeName=${value}`);
   }
+
+  updateEmployeeDetails(id:number,employee:any){
+    return this.httpClient.post<any>(`${this.baseURL}/${id}`,employee);
+  }
 }
