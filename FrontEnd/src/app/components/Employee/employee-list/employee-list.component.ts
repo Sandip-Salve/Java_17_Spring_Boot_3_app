@@ -8,6 +8,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-list',
@@ -21,11 +22,11 @@ export class EmployeeListComponent {
 
   searchInput = new FormControl('');
   employees$:Observable<any[]> = of([]);
-  displayedColumns: string[] = ['employeeId','employeeName','designation','createdDate'];
+  displayedColumns: string[] = ['employeeId','employeeName','designation','createdDate','action'];
   dataSource = this.employees$;
   loading!:boolean;
 
-  constructor(private employeeService:EmployeeService){
+  constructor(private employeeService:EmployeeService, private router:Router,){
 
   }
 
@@ -48,5 +49,21 @@ export class EmployeeListComponent {
       ))
     );
   }
+
+  onView(employee: any): void {
+    console.log('View:', employee);
+    this.router.navigate(['/employee/view',employee.employeeId],{state:{employeeDetails:employee}})
+  }
+  
+  onEdit(employee: any): void {
+    console.log('Edit:', employee);
+    this.router.navigate(['/employee/edit',employee.employeeId],{state:{employeeDetails:employee}})
+  }
+  
+  onDelete(employee: any): void {
+    console.log('Delete:', employee);
+    // confirm dialog + API call
+  }
+  
 
 }
