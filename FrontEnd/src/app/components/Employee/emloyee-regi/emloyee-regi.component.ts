@@ -96,6 +96,5 @@ export class EmloyeeRegiComponent {
 
     }
 
-    this.router.navigate(['/employee/list']);
   }
 }
