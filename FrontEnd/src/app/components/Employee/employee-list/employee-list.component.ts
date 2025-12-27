@@ -24,7 +24,7 @@ export class EmployeeListComponent {
   employees$:Observable<any[]> = of([]);
   displayedColumns: string[] = ['employeeId','employeeName','designation','createdDate','action'];
   dataSource = this.employees$;
-  loading!:boolean;
+  // loading!:boolean;
 
   constructor(private employeeService:EmployeeService, private router:Router,){
 
@@ -39,13 +39,13 @@ export class EmployeeListComponent {
       startWith(''),
       debounceTime(300),
       distinctUntilChanged(),
-      tap(()=>this.loading = true),
+      // tap(()=>this.loading = true),
       switchMap(searchInput=>this.employeeService.getSearchResult(searchInput).pipe(
         catchError((error:any)=>{
           console.error('error: ',error);
           return of([])
         }),
-        finalize(()=>this.loading = false)
+        // finalize(()=>this.loading = false)
       ))
     );
   }
