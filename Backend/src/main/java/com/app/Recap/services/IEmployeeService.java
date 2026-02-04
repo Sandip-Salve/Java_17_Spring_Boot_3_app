@@ -2,6 +2,8 @@ package com.app.Recap.services;
 
 import com.app.Recap.DTOs.EmployeeDto;
 import com.app.Recap.Entities.Employee;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,4 +21,6 @@ public interface IEmployeeService {
     List<Employee> searchEmployeeByName(String searchInput);
 
     String updateEmployee(Long employeeId, EmployeeDto employee);
+
+    Page<Employee> getPaginatedData(Pageable pageableObj);
 }

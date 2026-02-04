@@ -6,6 +6,8 @@ import com.app.Recap.Repositories.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -28,7 +30,7 @@ public class EmployeeServiceImpl implements IEmployeeService{
      * @return "status of new Employee creation"
      */
     @Override
-    @CacheEvict(value = "employees", allEntries = true)
+//    @CacheEvict(value = "employees", allEntries = true)
     public String saveEmployee(EmployeeDto employeeDto) {
         if(employeeDto!=null){
             Employee newEmployee = new Employee();
@@ -42,7 +44,7 @@ public class EmployeeServiceImpl implements IEmployeeService{
     }
 
     @Override
-    @Cacheable("employees")
+//    @Cacheable("employees")
     public List<Employee> getAllEmployees() {
         System.out.println("Inside Service: ");
         long start = System.currentTimeMillis();
@@ -67,7 +69,7 @@ public class EmployeeServiceImpl implements IEmployeeService{
     }
 
     @Override
-    @CacheEvict(value = "employees", allEntries = true)
+//    @CacheEvict(value = "employees", allEntries = true)
     public String updateEmployee(Long employeeId, EmployeeDto employee) {
         Employee existingEmployee = employeeRepository.findById(employeeId).orElse(null);
         if(existingEmployee!=null){
@@ -78,5 +80,13 @@ public class EmployeeServiceImpl implements IEmployeeService{
             return "Successfully updated";
         }
         return "Failed to update employee with ID: "+employeeId;
+    }
+
+    public Page<Employee> getPaginatedData(Pageable pageableObj){
+        Page<Employee> employeePage = null;
+        if(pageableObj!=null){
+            employeePage = employeeRepository.findAll(pageableObj);
+        }
+        return employeePage;
     }
 }
